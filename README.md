@@ -6,7 +6,7 @@
 1.nodejs:v8.1.2; <br />
 2.express: ~4.15.2; <br />
 3.mongoose: ^4.11.13, <br />
-<h4>开发进度<h4><br />
+<h3>开发进度</h3><br />
 前端： <br />
 1.index，下拉加载图片功能； <br />
 2.load AJAX拖拽上传图片功能； <br />
