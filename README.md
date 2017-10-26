@@ -14,8 +14,8 @@
 服务端： <br />
 首页缩略图片加载api及后台分页功能； <br />  
 
-<h3>项目
-├── Readme.md                   // help
+###########目录结构描述
+├── Readme.md                   // help
 ├── app                         // 应用
 ├── config                      // 配置
 │   ├── default.json
@@ -40,5 +40,3 @@
 ├── test
 ├── test-service.js
 └── tools
-
-
