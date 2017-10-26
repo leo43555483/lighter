@@ -1,4 +1,15 @@
 # we 图片画廊博客
 简介：私人图片画廊博客；
-框架：前段使用query+bootstrap ，服务端使用 nodejs express + mongoose； 
+##环境依赖
+nodejs:v8.1.2;
+express: ~4.15.2;
+mongoose: ^4.11.13,
+###开发进度
+前端：
+>>1.index，下拉加载图片功能；
+>>2.load AJAX拖拽上传图片功能；
+服务端：
+>>首页图片相应及分页功能；
+
+
 
