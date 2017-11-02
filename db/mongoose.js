@@ -11,7 +11,6 @@ module.exports = exports = function() {
     });
 
      server.on('open',function(error){
-        console.log('连接成功');
     });
     var thumbSchema = require('../Schema/thumbnai.model.js');
     exports.thumbnail = server.model('thumbnails',thumbSchema);

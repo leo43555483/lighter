@@ -3,8 +3,7 @@ var path = require('path');
 
 let getImg = function(req, res) {
   let url = req.query.a;
-  console.log("url"+url);
-  let rootPath = path.join(__dirname, '../public/images/');
+  let rootPath = path.join(__dirname, '../public/images/thumbs/');
   let imagPath = rootPath + url;
 
   fs.exists(imagPath, function(exists) {

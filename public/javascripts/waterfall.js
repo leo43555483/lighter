@@ -21,18 +21,18 @@
 
         init: function() {
             this.event();
-             //计算当前页面可以放几张图
-            
-
         },
         limit: function() {
             dataLimit = this.getColum() * this.getRow();
+            console.log("col",this.getColum());
+            console.log("row",this.getRow());
+
             if(dataLimit > 0) $("#g_calcSize").hide(); //将用于计算加载数量的块隐藏
         },
 
         getColum: function(wrapW, boxW) {
             let clienW = wrapW || $('#g_thumbnailWrap').outerWidth();
-            let thumbW = boxW || $('.thumbnail').parent().outerWidth();
+            let thumbW =  $('.thumBox').outerWidth() || $("#g_calcSize").outerWidth();
             let colum = Math.floor(clienW / thumbW);
             return colum
 
@@ -42,30 +42,35 @@
             let clienH = wrapH || $(document.documentElement)[0].clientHeight;
             let thumbH = boxH || $('.thumbnail').parent().outerHeight();
             let row = Math.ceil(clienH / thumbH);
-            console.log(clienH)
-            console.log(document.documentElement.clientHeight)
             return row
         },
 
         getResource: function() {
             let that = this;
             let cache = null;
+            console.log("test2",dataLimit);
+
             $.ajax({
-                url: `/api/waterfall?page=${that.pageCount}&limit=${dataLimit}`,
+                url: `/api/waterfall?page=${that.pageCount}&limit=${dataLimit}&limited=${that.caChe.oldLimit || ""}`,
                 type: 'get',
                 dataType: 'json',
                 async: false,
                 success: function(data) {
                     cache = data;
                     that.pendgData = true;
-                    that.pageCount++;
+                    that.pageCount = 1+(cache.newPage?cache.newPage:that.pageCount);
+                    console.log("pC",that.pageCount)
+                    console.log("aP",cache.totalPage)
+                    console.log("np",cache.newPage)
+                    console.log(cache)
+
                 }
             });
             return cache
         },
 
         render: function(ele) {
-            let items = `<div class="col-md-4 col-sm-6">
+            let items = `<div class="col-md-4 col-sm-6 thumBox">
                         <div class="thumbnail" style="height:300px;">
                             <a class="g_items" href="javascript:void(0)">
                                 <img class="img-responsive" src=${ele.url} style="height: 100%;">
@@ -90,7 +95,7 @@
             $(window).on("load",function(){
                 this.limit();
                 this.loadItems();
-                console.log(dataLimit)
+                console.log("reqL",dataLimit)
             }.bind(_self));
             $(window).on("scroll", function() {
                 this.loadItems();
@@ -99,7 +104,7 @@
             $(window).on("resize", function() {
                 this.limit();
                 this.loadItems();
-                console.log(dataLimit)
+                console.log("reSizeL",dataLimit)
             }.bind(_self));
 
         },
