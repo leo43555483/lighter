@@ -15,9 +15,6 @@ var pagenation = function(req,res) {
     }
     let reqLimit = parseInt(req.query.limit);
     let limits = req.query.limited;
-    console.log("req", reqLimit)
-    console.log("lim", limits)
-    console.log("p",p)
         thumbnail.count().then(function(count) {
             if (limits !== "" && parseInt(limits) !== reqLimit) { //请求限制不同，代表窗口尺寸改变
                 oldLimit = limits;
@@ -26,14 +23,12 @@ var pagenation = function(req,res) {
                 limits = reqLimit - (skip % reqLimit); //减去调整后每页多加载出的照片数
                 resData.oldLimit = reqLimit;  //将当前限制传到前台
                 resData.newPage = p;          //尺寸改变后的页数
-                console.log("?",resData.newPage)
             } else {
                 console.log("run")
                 limits = reqLimit;
                 skip = p * limits;
                 resData.newPage = null;
                 resData.oldLimit = limits;
-                console.log(resData.oldLimit)
             }
             pages = Math.ceil(count / limits); //总页数
             if (resData.totalPage === null) resData.totalPage = pages;
@@ -43,7 +38,7 @@ var pagenation = function(req,res) {
 
                 resData.datas = data;
                 res.json(resData);
-
+                console.log(data)
                 console.log("发送成功")
 
             });

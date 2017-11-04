@@ -22,6 +22,7 @@ function PhotoUpload(v,control){
             PhotoUpload.prototype = {
                 init:function(){
                     let self = this;
+                    this.inform = this.control.inform;
                     if(this.views.inputFile){
                         this.views.inputFile.on("change",function(e){
                             self.getFiles(e);
@@ -36,32 +37,34 @@ function PhotoUpload(v,control){
                 submitData:function(){
                     let self = this;
                     let file = this.fileArray;
-                     
+                    let form  = new FormData();
                     let condition = this.fileArray.length <= 0?true:false;
-                    let checked = self.control.check(condition);
-                    if(!checked){
-                        this.views.inputAuthor();
-                        return
-                    }
+                    this.inform.author = self.control.check(condition);
                     let opt = {
                         url:'/api/uoloadPhoto',
                         type:'post',
                         async:true,
-                        file:null,
+                        file:[],
+                    }
+                    if(!this.inform){
+                        this.views.inputAuthor();
+                        return
+                    }else{
+                        for(let i = 0; i < file.length; i++){
+                            form.append('file',file[i]);
+                        }
+                        console.log(this.inform)
+                        form.append('information',JSON.stringify(this.inform));
+                        self.Ajax(opt,form);
+                        
                     }
                     
-                    for(let i = 0; i < file.length; i++){
-                        file[i].author = checked;
-                        opt.file = file[i];
-                        self.Ajax(opt,i);
-                    }
                 },
 
-                Ajax:function(opt,index){
+                Ajax:function(opt,form){
                     let xhr = new XMLHttpRequest();
-                    let form  = new FormData();
-                    form.append(`file`,opt.file)
                     let self = this;
+                    console.log("form",form.valueOf().toString())
                     if(xhr.upload){ 
                         xhr.upload.addEventListener("progress",function(e){ 
                             console.log(e.total)
@@ -73,7 +76,6 @@ function PhotoUpload(v,control){
                         //与服务端链接状态 
                             if(xhr.status === 200){ 
                             //服务器返回状态
-                                console.log(0)
                                 self.upArray(opt.file);
                                 console.log(self.fileArray)
                                 /*self.views.success();*/
@@ -85,7 +87,7 @@ function PhotoUpload(v,control){
                     }
 
                     xhr.open(opt.type,opt.url,opt.async);
-/*                    xhr.setRequestHeader("content-type","multipart/form-data");*/
+
                     xhr.send(form||null);
 
                 },

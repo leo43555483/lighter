@@ -3,9 +3,12 @@ var mongoose = require('mongoose'),
     ObjectId = schema.ObjectId;
 
 var thumbSchema = new schema({
-    url : String,
+    url : String,//此图缩略图地址
     author : String,
-    avatarPath : String 
+    avatarPath : String ,
+    gellery:String,//此画廊图地址
+    person:String,
+
 })
 
 
