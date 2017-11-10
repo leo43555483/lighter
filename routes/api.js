@@ -12,9 +12,9 @@ var uploadImg = require('../middlerware/uploadImg');
 router.get('/waterfall',pagation);
 
 /*获取图片url*/
-router.get('/indexThumbnails',getThumbnail);
+router.get('/Thumbs/:author/:dir/:filename',getThumbnail);
 
-router.post('/uoloadPhoto',multer.fields([{name:"file",  maxCount:20},{name:"information",  maxCount:20}]),uploadImg('../public/images/photo'));
+router.post('/uploadPhoto',multer.fields([{name:"file",  maxCount:20},{name:"information",  maxCount:20}]),uploadImg('./public/images/'));
 
 
 

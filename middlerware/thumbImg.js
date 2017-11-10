@@ -1,26 +1,33 @@
 var fs = require('fs');
 var path = require('path');
-
+var app = require('express');
 let getImg = function(req, res) {
-  let url = req.query.a;
-  let rootPath = path.join(__dirname, '../public/images/thumbs/');
-  let imagPath = rootPath + url;
+  let params = req.params;
+  let uri = appendSting(params);
+  console.log(uri)
+  let rootPath = path.join(process.cwd(), '/public/images/');
+  let imagPath = rootPath + uri;
 
   fs.exists(imagPath, function(exists) {
     if (!exists) {
       res.writeHead(404);
-      res.end();
+      res.sendfile(rootPath+'/defaults/tDefualt.png');
     } else {
       fs.readFile(imagPath, function(erro, data) {
         if (erro) console.log(erro);
-        res.writeHead(200, {
-          'Conten-Type': 'image/jpg'
-        });
-        res.end(data, 'binary');
+        res.sendfile(imagPath);
       })
     }
   })
   console.log(imagPath)
 }
 
+function appendSting(obj){
+    let arr = [];
+    for(let item in obj){
+        arr.push(obj[item]);
+    }
+    let str = arr.join("/");
+    return str
+}
 module.exports = getImg;

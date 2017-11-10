@@ -1,6 +1,6 @@
 
 var pagenation = function(req,res) {
-    let server = require('../db/mongoose.js')();
+    let server = require('../db/mongoose/mongoose.js')();
     let thumbnail = server.thumbnail;
 
     let p = req.query.page;

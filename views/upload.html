@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/public.css">
-    <link rel="stylesheet" href="stylesheets/upload.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>lighter upload</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/public/public.css">
+    <link rel="stylesheet" href="stylesheets/upload/upload.css">
+    <link rel="stylesheet" href="stylesheets/upload/signin.css">
 </head>
 <body>
-    <div class="g_uploadWrap">
+     <nav class="navbar" style="border: 0;">
+            <div class="g_navbar_signin">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand g_sign-brand" href="javascript:void(0)">Lighter</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    <div class="g_uploadWrap container">
         <form method="post" enctype="multipart/form-data">
-            <input class="g_block g_photoInform" style="margin-left: 40px" type="text" name="photo_author" placeholder="请输入作者名称" required>
-            <ul id="g_photoUpload" class="g_itemWrap">
+            <input class="g_block g_photoInform" type="text" name="photo_author" placeholder="请输入作者名称" required>
+            <ul id="g_photoUpload" class="g_itemWrap" style="padding-left: 0;">
                 <li class="g_photoItem">
                     <label class="g_uploadBtn" for="g_uploadInput">
                         <p class="g_Center">请在此处添加照片</p>                       
@@ -24,10 +38,9 @@
         </div>      
     </div>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascripts/upload.js"></script>
+    <script type="text/javascript" src="/javascripts/upload/upload.js"></script>
     <script type="text/javascript">
-        (function($){
-                    
+        (function($){           
             let v = {
                 inputFile: $("#g_photoUpload"),//上传文件区域
                 submitBtn: $(".g_submitLoad"),//提交按钮
@@ -137,6 +150,12 @@
                 },
                 inform:{
                     author:String
+                },
+                ajaxConfig:{
+                    url: '/api/uploadPhoto',
+                    type: 'post',
+                    async: true,
+                    file: null,
                 }
             };
             let upload = new photoUpload(v,control);
