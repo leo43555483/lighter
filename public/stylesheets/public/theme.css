@@ -1,0 +1,87 @@
+/*header*/
+
+.g_navbar_theme {
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, .3), transparent);
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    transition: all .2s linear;
+}
+
+.g_navbar_active {
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, .3);
+    transition: all .2s linear;
+}
+
+.g_head_pic {
+    background: center url(/images/background/bg-20171017235825.jpg) no-repeat;
+    background-size: cover;
+    min-height: 320px;
+    height: calc(100vh - 100px);
+    margin-bottom: 20px;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    background: transparent;
+}
+
+.g_navbar_theme .g_active {
+    border-bottom: 1px solid #fff;
+}
+
+.g_navbar_active .g_active {
+    border-bottom: 1px solid #337ab7;
+}
+
+
+.g_navbar_theme .navbar-brand {
+    color: #337ab7;
+}
+
+.g_navbar_theme .navbar-nav>li>a:focus,
+.g_navbar_theme .navbar-nav>li>a {
+    color: #337ab7;
+}
+
+.g_navbar_scroll {
+    color: #050505;
+}
+
+.g_toggleNavBar{
+    background: transparent;
+}
+.g_toggleNavBar .icon-bar{
+    background: #337ab7;
+}
+
+/* 内容部分 */
+
+.g_cutOff {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #dcdcdc;
+}
+
+
+/* footer */
+
+.g_linkSNS {
+    overflow: hidden;
+}
+
+.g_linkSNS>a {
+    float: right;
+    margin-left: 24px;
+    text-decoration: none;
+}
+
+.g_linkSNS>a>i {
+    font-size: 1.714em !important;
+    color: #000000;
+}
+
+.g_linkSNS>a>i:hover {
+    font-size: .75em;
+    text-decoration: underline;
+}
