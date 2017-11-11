@@ -9,6 +9,8 @@ module.exports = function(mongoose) {
 
         this.getAllByProperty = getAllByProperty;
         this.findOneProperty = findOneProperty;
+        this.authorUser = authorUser;
+        this.getUserName = getUserName;
     }
 
     Photogragher.prototype.save = function(mid, callback) {
@@ -41,6 +43,28 @@ module.exports = function(mongoose) {
         })
     }
 
+    function authorUser(name,pass,fn){  
+        let self = this;
+        self.getUserName(name,function(err,user){
+            if(err) return fn(err);
+            if(!user.userName) return fn(null,null,1); //账户不存在
+            bcrypt.compare(pass,user.passWord,function(err，isMatch){
+                if(err) return fn(err);
+                if(isMatch) return fn(null,user);
+                return fn(null,null,2); //密码错误
+            })
+            
+        })
+
+     }
+    function getUserName(name,fn){
+        self.findOneProperty({userName:name},null,function(err,user){
+            if(err){
+                return fn(err)
+            }
+            fn(null,new Photogragher(user))
+        })
+    }
     function getAllByProperty(property, field, callback) {
         mongoose.find(property, field, function(err, data) {
             if (err) return callback(err);
