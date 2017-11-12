@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var path = require('path');
 var fs = require('fs');
+var server = require('../db/mongoose/mongoose.js')();
 var mongoose = server.passModel;
 var User = require('../db/mongoose/modelMethod.js')(mongoose);
 

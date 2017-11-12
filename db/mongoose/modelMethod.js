@@ -48,7 +48,7 @@ module.exports = function(mongoose) {
         self.getUserName(name,function(err,user){
             if(err) return fn(err);
             if(!user.userName) return fn(null,null,1); //账户不存在
-            bcrypt.compare(pass,user.passWord,function(err，isMatch){
+            bcrypt.compare(pass,user.passWord,function(err,isMatch){
                 if(err) return fn(err);
                 if(isMatch) return fn(null,user);
                 return fn(null,null,2); //密码错误

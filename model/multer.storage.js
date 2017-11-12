@@ -1,5 +1,5 @@
 var multer = require('multer');
-var uploadStorage = require('../Schema/upload.multer.model.js');
+var uploadStorage = require('../model/upload.multer.model.js');
 module.exports = function(model){
     var storage = multer.diskStorage(model);
 

@@ -16,7 +16,7 @@ module.exports = exports = function() {
     exports.thumbnail = server.model('thumbnails',thumbSchema);
 
     var passSchema = require('./dbModel/pass.model.js');
-    exports.passModel = server.model('thumbnails',thumbSchema);
+    exports.passModel = server.model('passSchema',passSchema);
 
     return exports
 }

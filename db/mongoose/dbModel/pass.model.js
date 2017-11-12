@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
 
 var passSchema = new schema({
     userName:String,
-    passWord:Mixed,
+    passWord:String,
     admin:Boolean
 })
 
 
-module.exports =  thumbSchema;
+module.exports =  passSchema;
