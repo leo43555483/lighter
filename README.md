@@ -11,8 +11,8 @@
 
 ## 开发进度  
 
-*  功能:  
-     * 通过/upload/login/进行后台登录（session拦截）;
+*  功能:  
+     * 通过/upload/login/进行后台登录（session拦截）;
      * /upload/loged/ 后台上传图片页面;  
      * mongod对图片信息及作者持久化;  
      * 首页响应式动态加载图片;
