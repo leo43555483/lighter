@@ -20,9 +20,12 @@
              res.json().then(function(json){
                 let msg = JSON.parse(json);
                 if(msg.err_code === 1) {
+                    v.msgPass.html("");
                     v.msgName.html(msg.info);
+
                 }
                 if(msg.err_code === 2) {
+                    v.msgName.html("");
                     v.msgPass.html(msg.info);
                 }
             })

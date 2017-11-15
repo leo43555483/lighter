@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
-var multer = require('../middlerware/Uploadmulter');
-var pagation =  require('../middlerware/pagation');
-var getThumbnail = require('../middlerware/thumbImg');
-var uploadImg = require('../middlerware/uploadImg');
+var pagation =  require('../middlerware/index/pagation');
+var getThumbnail = require('../middlerware/index/thumbImg');
+var multer = require('../middlerware/upload/Uploadmulter');
+var uploadImg = require('../middlerware/upload/uploadImg');
 
 
 /*图片分页*/

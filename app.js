@@ -10,7 +10,6 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var index = require('./routes/index');
-var users = require('./routes/users');
 var upload = require('./routes/upload');
 var api = require('./routes/api');
 var config = require('./common/setting.js'); //相关配置
@@ -41,7 +40,6 @@ app.use(express.static('public'));
 
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/upload',upload);
 app.use('/api',api);
 

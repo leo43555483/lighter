@@ -1,10 +1,10 @@
 let fs = require('fs');
-let server = require('../db/mongoose/mongoose.js')();
+let server = require('../../db/mongoose/mongoose.js')();
 let mongoose = server.thumbnail;
-let dbMethod = require('../db/mongoose/modelMethod.js')(mongoose);
+let dbMethod = require('../../db/mongoose/modelMethod.js')(mongoose);
 let gm = require('gm');
 let imageMagick = gm.subClass({ imageMagick : true });
-var createThumbs = require('./createThumbs.js');
+var createThumbs = require('../createThumbs.js');
 let path = require('path');
 
 module.exports = function(dir) {
