@@ -1,6 +1,6 @@
  # we 图片画廊博客
 
-简介：私人图片画廊博客
+简介：私人图片画廊博客,基于jquery Bootstrap nodejs mongoose对响应式图片作品网站，可通过后台登录页面上传图片。
 
 ## 环境依赖
 1.nodejs:v8.1.2;  
