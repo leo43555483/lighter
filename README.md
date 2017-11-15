@@ -11,20 +11,28 @@
 
 ## 开发进度  
 
-*  前端:  
-     * index页实现向下滚动加载图片功能;
-     * load页实现AJAX拖拽上传图片功能;  
-     
-*  服务端:  
+*  功能: 
+     * 首页响应式动态加载图片;
+     * /upload/login后台登录（session拦截）;
+     * /upload/loged上传图片;
+     * mongod 储存图片及作者信息
 
-     * 首页缩略图片加载api及后台分页功能（可根据前台页面尺寸动态返回合适数量照片）;
 
 #### 目录结构描述
 ```
 ├──Schema                   // mongoose 模型
 ├── bin                     // node启动入口
-├── db  
-├── middlerware             // 中间件
+├── common/setting.js       
+├── db/mongoose
+│    ├── dbMode             //数据库模型
+│    ├── db.config.js       
+│    ├── modelMethod.js     //mongoose方法
+│    ├── mongoose.js
+├── middlerware             // 路由中间件
+│    ├── index              //首页路由方法
+│    ├── login              //后台登录页面方法
+│    ├── uload              //后台上传页面方法
+│    ├── createThumbs.js
 ├── node_modules
 ├── public                  // web静态资源加载
 │    ├── font
