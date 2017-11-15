@@ -11,8 +11,8 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="http://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="stylesheets/upload/signin.css" rel="stylesheet">
-    <link href="stylesheets/pubilc/pubilc.css" rel="stylesheet">
+    <link href="/stylesheets/upload/signin.css" rel="stylesheet">
+    <link href="/stylesheets/conmmon/conmmon.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!--     <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-fixed-top ">
+    <nav class="navbar">
             <div class="g_navbar_signin">
                 <div class="container">
                     <div class="navbar-header">
@@ -34,22 +34,22 @@
             </div>
         </nav>
     <div class="container vertical-center">
-        <form class="form-signin">
+        <form class="form-signin" method="post" enctype="application/X-WWW-form-urlencoded" id="user" name="user" style="font-size: 0;">
             <h2 class="form-signin-heading" style="text-align: center;">Lighter 管理登录</h2>
-            <label for="inputEmail" class="sr-only">账号</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="账号" required="" autofocus="">
-            <label for="inputPassword" class="sr-only">密码</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="密码" required="">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me">记住我
-                </label>
-            </div>
-            <button class="btn btn-primary btn-sm btn-block" type="submit">登录</button>
+            <label  for="inputName" class="sr-only" ame="userName">账号</label>
+            <input type="text" id="inputName" class="form-control" placeholder="账号" name="userName" required autofocus autocomplete="off">
+            <i id="g_mgsName" class="g_userInfo"></i>
+            <label for="inputPassword" class="sr-only" name="pass">密码</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="pass" autocomplete="off">
+            <i id="g_mgspass" class="g_userInfo"></i>
+            <button class="btn btn-primary btn-sm btn-block" type="button" id="g_loginSubmit">登录</button>
         </form>
     </div>
-    <!-- /container -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/javascripts/common/fetch.js"></script>
+    <script src="/javascripts/upload/login.js"></script>
+   <!--  /container
+   IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 

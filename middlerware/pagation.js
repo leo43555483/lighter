@@ -13,6 +13,7 @@ var pagenation = function(req,res) {
         newPage: null,
         oldLimit:null
     }
+    res.json(resData)
     let reqLimit = parseInt(req.query.limit);
     let limits = req.query.limited;
         thumbnail.count().then(function(count) {
@@ -35,10 +36,9 @@ var pagenation = function(req,res) {
             p = Math.max(p, 0);
             p = Math.min(p, pages);
             thumbnail.find().limit(limits).skip(skip).then(function(data) {
-
                 resData.datas = data;
                 res.json(resData);
-                console.log(data)
+                res.end();
                 console.log("发送成功")
 
             });

@@ -49,7 +49,6 @@
         getResource: function() {
             let that = this;
             let cache = null;
-            console.log("test2",dataLimit);
 
             $.ajax({
                 url: `/api/waterfall?page=${that.pageCount}&limit=${dataLimit}&limited=${that.caChe.oldLimit || ""}`,
@@ -60,11 +59,6 @@
                     cache = data;
                     that.pendgData = true;
                     that.pageCount = 1+(cache.newPage?cache.newPage:that.pageCount);
-                    console.log("pC",that.pageCount)
-                    console.log("aP",cache.totalPage)
-                    console.log("np",cache.newPage)
-                    console.log(cache)
-
                 }
             });
             return cache

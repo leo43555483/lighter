@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-    schema = mongoose.Schema,
-    ObjectId = schema.ObjectId;
+    schema = mongoose.Schema;
 
 var passSchema = new schema({
     userName:String,

@@ -58,7 +58,6 @@ function PhotoUpload(v,control){
                 Ajax:function(opt,form){
                     let xhr = new XMLHttpRequest();
                     let self = this;
-                    console.log("form",form.valueOf().toString())
                     if(xhr.upload){ 
                         xhr.upload.addEventListener("progress",function(e){ 
                             console.log(e.total)

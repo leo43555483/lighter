@@ -4,7 +4,7 @@ body {
 }
 
 body {
-    padding:0; 
+    padding: 0;
     background-color: #eee;
 }
 
@@ -61,4 +61,23 @@ a:focus {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.logOut {
+    float: right;
+    padding: 15px;
+}
+
+.logOut a {
+    text-decoration: none;
+    color: #eee;
+}
+.g_userInfo{
+    display: inline-block;
+    height: 15px;
+    width: 100%;
+    margin: 8px 0;
+    line-height: 15px;
+    color: #da0303;
+    font-size: 14px;
 }
