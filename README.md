@@ -11,11 +11,11 @@
 
 ## 开发进度  
 
-*功能: 
-     *  首页响应式动态加载图片;
-     *  /upload/login后台登录（session拦截）;
-     *  /upload/loged上传图片;
-     *  mongod 储存图片及作者信息
+*  功能: 
+     *  首页响应式动态加载图片;  
+     *  /upload/login后台登录（session拦截;  
+     *  /upload/loged上传图片;  
+     *  mongod 储存图片及作者信息  
 
 
 #### 目录结构描述
