@@ -13,7 +13,6 @@ var pagenation = function(req,res) {
         newPage: null,
         oldLimit:null
     }
-    res.json(resData)
     let reqLimit = parseInt(req.query.limit);
     let limits = req.query.limited;
         thumbnail.count().then(function(count) {
@@ -25,7 +24,6 @@ var pagenation = function(req,res) {
                 resData.oldLimit = reqLimit;  //将当前限制传到前台
                 resData.newPage = p;          //尺寸改变后的页数
             } else {
-                console.log("run")
                 limits = reqLimit;
                 skip = p * limits;
                 resData.newPage = null;
@@ -38,9 +36,11 @@ var pagenation = function(req,res) {
             thumbnail.find().limit(limits).skip(skip).then(function(data) {
                 resData.datas = data;
                 res.json(resData);
-                res.end();
                 console.log("发送成功")
 
+            }).catch(function(e){
+                console.log('indexPagation',e);
+                res.status(500);
             });
 
         });

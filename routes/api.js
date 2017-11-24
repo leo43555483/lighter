@@ -16,6 +16,4 @@ router.get('/Thumbs/:author/:dir/:filename',getThumbnail);
 
 router.post('/uploadPhoto',multer.fields([{name:"file",  maxCount:20},{name:"information",  maxCount:20}]),uploadImg('./public/images/'));
 
-
-
 module.exports = router
