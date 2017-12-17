@@ -1,12 +1,35 @@
 /*字体图标*/
+html,body{
+    height: 100%;
+}
 
+.g_pageFull{
+    height: 100%;
+}
+
+.verticalCenter{
+    top: 50%;
+    transform: translateY(-50%);
+}
+.centeAll{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+a{
+    color: #fff;
+}
+a:focus, a:hover{
+    color:#fff;
+    text-decoration: none;
+}
 @font-face {
     font-family: 'iconfont';
-    src: url('/font/font_390817_0z8p7r26plgcik9/iconfont/iconfont.eot');
-    src: url('/font/font_390817_0z8p7r26plgcik9/iconfont.eot?#iefix') format('embedded-opentype'),
-    url('/font/font_390817_0z8p7r26plgcik9/iconfont.woff') format('woff'),
-    url('/font/font_390817_0z8p7r26plgcik9/iconfont.ttf') format('truetype'),
-    url('/font/font_390817_0z8p7r26plgcik9/iconfont.svg#iconfont') format('svg');
+    src: url(/font/font_390817_u9rir7vmwzziwwmi/iconfont.eot);
+    src: url(/font/font_390817_u9rir7vmwzziwwmi/iconfont.eot?#iefix) format('embedded-opentype'),
+    url(/font/font_390817_u9rir7vmwzziwwmi/iconfont.woff) format('woff'),
+    url(/font/font_390817_u9rir7vmwzziwwmi/iconfont.ttf) format('truetype'),
+    url(/font/font_390817_u9rir7vmwzziwwmi/iconfont.svg#iconfont) format('svg');
 }
 
 .iconfont {

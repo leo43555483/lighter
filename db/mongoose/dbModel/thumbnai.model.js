@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
 
 var thumbSchema = new schema({
     url : String,//此图缩略图地址
+    userId: String,
     author : String,
     avatarPath : String ,
     gellery:String,//此画廊图地址

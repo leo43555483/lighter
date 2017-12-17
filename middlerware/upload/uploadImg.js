@@ -103,8 +103,8 @@ function save(files, opt) {
             creat(thumbOpt);
 
             let photoMsg = new dbMethod({
-                gid: gid,
-                url: `/api/Thumbs/${gid}/thumbs/${thumUri}`,
+                url: `/api/photos/${gid}/thumbs/${thumUri}`,
+                userId: gid,
                 author: opt.author,
                 avatarPath: `/api/${gid}/`,
                 gellery: `/api/photos/${gid}/gellery/${imgName}`,

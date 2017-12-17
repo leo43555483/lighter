@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatiable" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <link href="/stylesheets/lib/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/show/animation.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/show/theme.show.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/conmmon/conmmon.css">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>galleryPorject</title>
+    <script type="text/javascript">
+        {{#each datas}}
+            res.push({{url}});
+        {{/each}}
+    </script>
+</head>
+
+<body>
+    <div class="g_theaterwrap container-fluid g_pageFull">
+        <div class="row g_pageFull" style="overflow: hidden; position: relative;">
+            <div id="g_showgellary" class="col-md-9 g_inserve g_pageFull">
+                <div class="navbar">
+                    <div class="container-fluid">
+                        <div class="nav navbar-right">
+                            <ul class="navbar-nav">
+                                <li class="g_headIcon">
+                                    <i class="iconfont g_fullScreen" title="全屏播放">&#xe60c;</i>
+                                </li>
+                                <li class="g_headIcon">
+                                    <a href="/"><i class="iconfont g_close" title="关闭">&#xe69a;</i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="g_showitem g_pageFull">
+                    <div class="g_showpic" style="overflow: hidden;">
+                        {{# with datas}}
+                            {{# each this}}
+                                <img class="g_photo centeAll" src={{gellery}} style="width: auto;height: auto;"> 
+                            {{/each}}
+                        {{/with}}
+                            <div class="g_btnLeft verticalCenter">
+                                <i class="iconfont icon-custom-forward g_left">&#xe697;</i>
+                            </div>
+                            <div class="g_btnRight verticalCenter">
+                                <i class="iconfont g_right">&#xe6a7;</i>
+                            </div>
+                        </div>
+                        <div class="g_indwrap" style="height: 20%;">
+                            <div class="g_indicators" style="width: 500%;transform: translateX(1px);">
+                                {{# with datas}}
+                                    {{# each this}} 
+                                        <a class="g_thumb g_currentThumb" style="background: url({{url}}) center; background-size: cover "></a> 
+                                    {{/each}}
+                                {{/with}}
+                        </div>
+                    </div>
+                </div>
+                </script>
+            </div>
+            <aside class="col-md-3 g_inserve sidebar g_pageFull">
+                <div class="g_personAttr">
+                    <div class="g_uerIform g_left">
+                        <p class="g_userName">
+                            {{#authortInfo datas}} {{/authortInfo}}
+                        </p>
+                        <p class="g_userName g_userIntroduce"><span class="g_introduceTitle">简介：</span>xxxxxxx</p>
+                    </div>
+                    <div class="g_AvatorWrap g_left">
+                        <a class="g_userRegion" href="javascript:;">
+                            <img class="g_userAvator" src=""></img>
+                        </a>
+                    </div>
+                </div>
+                <hr class="g_showPagehr">
+            </aside>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/show/coursel.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log('res')
+        function getHeight() {
+            let outerHeight = $("#g_showgellary").height(),
+                nav = document.querySelector(".navbar"),
+                navHeight = getcomputed(nav, 'marginBottom') + nav.offsetHeight,
+                targetHeight = outerHeight - navHeight;
+            console.log(outerHeight)
+            $(".g_showitem").height(targetHeight);
+        }
+
+
+        /*全屏*/
+        function fullScreen() {
+            let btn = $('.g_fullScreen'),
+                page = $('#g_showgellary'),
+                showItem = $('.g_showpic'),
+                indicator = $('.g_indwrap'),
+                pending = false;
+            btn.on('click', function() {
+                if (!pending) {
+                    page.removeClass('col-md-9').addClass('col-md-12');
+                    showItem.height('100%');
+                    indicator.hide();
+                    pending = true;
+                } else {
+                    page.removeClass('col-md-12').addClass('col-md-9');
+                    showItem.height('70%');
+                    indicator.show();
+                    pending = false;
+                }
+            });
+        }
+
+        fullScreen();
+
+        function getcomputed(obj, attr) {
+            if (obj.currentStyle) {
+                return parseFloat(obj.currentStyle[attr]);
+            } else {
+                return parseFloat(window.getComputedStyle(obj, null)[attr]);
+            }
+
+        }
+        getHeight();
+        $(window).on("resize", getHeight);
+
+        $("#g_showgellary").slider();
+    });
+    </script>
+    <!-- <script type="text/javascript" src="js/waterfall.js"></script> -->
+</body>
+
+</html>

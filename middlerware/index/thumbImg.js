@@ -4,7 +4,6 @@ var app = require('express');
 let getImg = function(req, res) {
   let params = req.params;
   let uri = appendSting(params);
-  console.log(uri)
   let rootPath = path.join(process.cwd(), '/public/images/');
   let imagPath = rootPath + uri;
 
