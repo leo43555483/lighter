@@ -2,3 +2,5 @@ newUser.js
 node_modules/
 temp/
 common/setting.js
+common/qnConfig.js
+
