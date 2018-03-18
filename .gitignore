@@ -1,2 +1,4 @@
 newUser.js
-node_modules/#
+node_modules/
+temp/
+common/setting.js
