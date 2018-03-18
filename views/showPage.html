@@ -14,52 +14,43 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <title>galleryPorject</title>
-    <script type="text/javascript">
-        {{#each datas}}
-            res.push({{url}});
-        {{/each}}
-    </script>
 </head>
 
 <body>
     <div class="g_theaterwrap container-fluid g_pageFull">
-        <div class="row g_pageFull" style="overflow: hidden; position: relative;">
+        <div class="row g_pageFull g_overFlow g_pageWrap">
             <div id="g_showgellary" class="col-md-9 g_inserve g_pageFull">
                 <div class="navbar">
                     <div class="container-fluid">
                         <div class="nav navbar-right">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav g_show-ul">
                                 <li class="g_headIcon">
-                                    <i class="iconfont g_fullScreen" title="全屏播放">&#xe60c;</i>
+                                    <a href="javascript:;" class="g_Block">
+                                        <i class="iconfont g_fullScreen" title="全屏播放">&#xe60c;</i>
+                                    </a>
                                 </li>
                                 <li class="g_headIcon">
-                                    <a href="/"><i class="iconfont g_close" title="关闭">&#xe69a;</i></a>
+                                    <a href="/" class="g_Block">
+                                        <i class="iconfont g_close" title="关闭">&#xe69a;</i>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="g_showitem g_pageFull">
-                    <div class="g_showpic" style="overflow: hidden;">
-                        {{# with datas}}
-                            {{# each this}}
-                                <img class="g_photo centeAll" src={{gellery}} style="width: auto;height: auto;"> 
-                            {{/each}}
-                        {{/with}}
-                            <div class="g_btnLeft verticalCenter">
-                                <i class="iconfont icon-custom-forward g_left">&#xe697;</i>
-                            </div>
-                            <div class="g_btnRight verticalCenter">
-                                <i class="iconfont g_right">&#xe6a7;</i>
-                            </div>
+                    <div class="g_showpic g_overFlow">
+                        <img class="g_photo centeAll" src="" >
+                        <div class="g_btnLeft verticalCenter">
+                            <i class="iconfont icon-custom-forward g_left js-g_left">&#xe697;</i>
                         </div>
-                        <div class="g_indwrap" style="height: 20%;">
-                            <div class="g_indicators" style="width: 500%;transform: translateX(1px);">
-                                {{# with datas}}
-                                    {{# each this}} 
-                                        <a class="g_thumb g_currentThumb" style="background: url({{url}}) center; background-size: cover "></a> 
-                                    {{/each}}
-                                {{/with}}
+                        <div class="g_btnRight verticalCenter">
+                            <i class="iconfont js-g_right">&#xe6a7;</i>
+                        </div>
+                    </div>
+                    <div class="g_indwrap">
+                        <div class="g_indicators">
+                            {{#renderThumb datas fimg}}{{/renderThumb}}
                         </div>
                     </div>
                 </div>
@@ -69,7 +60,7 @@
                 <div class="g_personAttr">
                     <div class="g_uerIform g_left">
                         <p class="g_userName">
-                            {{#authortInfo datas}} {{/authortInfo}}
+                            {{#authortInfo datas}}{{/authortInfo}}
                         </p>
                         <p class="g_userName g_userIntroduce"><span class="g_introduceTitle">简介：</span>xxxxxxx</p>
                     </div>
@@ -84,58 +75,19 @@
         </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascripts/show/coursel.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-        console.log('res')
-        function getHeight() {
-            let outerHeight = $("#g_showgellary").height(),
-                nav = document.querySelector(".navbar"),
-                navHeight = getcomputed(nav, 'marginBottom') + nav.offsetHeight,
-                targetHeight = outerHeight - navHeight;
-            console.log(outerHeight)
-            $(".g_showitem").height(targetHeight);
-        }
-
-
-        /*全屏*/
-        function fullScreen() {
-            let btn = $('.g_fullScreen'),
-                page = $('#g_showgellary'),
-                showItem = $('.g_showpic'),
-                indicator = $('.g_indwrap'),
-                pending = false;
-            btn.on('click', function() {
-                if (!pending) {
-                    page.removeClass('col-md-9').addClass('col-md-12');
-                    showItem.height('100%');
-                    indicator.hide();
-                    pending = true;
-                } else {
-                    page.removeClass('col-md-12').addClass('col-md-9');
-                    showItem.height('70%');
-                    indicator.show();
-                    pending = false;
-                }
-            });
-        }
-
-        fullScreen();
-
-        function getcomputed(obj, attr) {
-            if (obj.currentStyle) {
-                return parseFloat(obj.currentStyle[attr]);
-            } else {
-                return parseFloat(window.getComputedStyle(obj, null)[attr]);
-            }
-
-        }
-        getHeight();
-        $(window).on("resize", getHeight);
-
-        $("#g_showgellary").slider();
-    });
+    window.resource = {
+        gelUrl:null,
+        _FIMG:null
+    }
+    let a = [];
+    a.push({{#getValue datas}}{{/getValue}})
+    window.resource.gelUrl = a;
+    window.resource._FIMG = '{{fimg}}';
+    console.log(resource)
     </script>
+    <script type="text/javascript" src="/javascripts/show/showpage.js"></script>
+    <script type="text/javascript" src="/javascripts/show/coursel.js"></script>
     <!-- <script type="text/javascript" src="js/waterfall.js"></script> -->
 </body>
 

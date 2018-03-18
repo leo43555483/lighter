@@ -4,7 +4,7 @@ var uploadModel = {
     },
 
     filename:function(req,file,cb){
-        var origName = file.originalname;
+        var origName = file.originalname.replace(/\s+/g,"");
         var fileForm = origName.split('.');
         var newName = fileForm.splice(0,(fileForm.length-1));
         var result = newName+'-'+Date.now()+'.'+fileForm[fileForm.length-1];

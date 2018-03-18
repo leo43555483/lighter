@@ -1,0 +1,19 @@
+module.exports = {
+    qn:{
+        accessKey:'YAqRofjdBmZzN9fU5p5bEQn_5NP9H1EwE1HeJ3tD',
+        secretKey:'mkjMOvC4aJZrna8QNRj4vwxUkIpTrzO73r2pjWs5',
+        uploadURL:'up-z2.qiniu.com'
+    },
+    tBukect:{
+        name:'lighter-t-img',
+        url:'http://p2y49suo8.bkt.clouddn.com'
+    },
+    oBucket:{
+        name:'lighter-o-img',
+        url:'http://p2ycecpeb.bkt.clouddn.com'
+    },
+    avatar:{
+        name:'lighter-avatar',
+        url:'http://p5h3gnuck.bkt.clouddn.com'
+    }
+}

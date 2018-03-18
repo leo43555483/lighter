@@ -1,19 +1,23 @@
-var mongoose = require('mongoose');
-var dbUri = require('./db.config.js');
+const mongoose = require('mongoose');
+const dbUri = require('./db.config.js');
 module.exports = exports = function() {
     mongoose.Promise = global.Promise;
-    var server = mongoose.connect(dbUri.uri, {
+    const server = mongoose.connect(dbUri.uri, {
         useMongoClient: true
     });
 
     server.on('error',function(error){
-        console.log('连接错误');
+        console.log('mongoose连接错误');
+        throw new Error(error)
     });
 
      server.on('open',function(error){
     });
-    var thumbSchema = require('./dbModel/thumbnai.model.js');
+    const thumbSchema = require('./dbModel/thumbnai.model.js');
     exports.thumbnail = server.model('thumbnails',thumbSchema);
+
+    const authorInfo =  require('./dbModel/authorInfo.model.js');
+    exports.authorInfo = server.model('authorInfo',authorInfo);
 
     var passSchema = require('./dbModel/pass.model.js');
     exports.passModel = server.model('passSchema',passSchema);

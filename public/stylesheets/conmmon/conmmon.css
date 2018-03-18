@@ -16,6 +16,12 @@ html,body{
     left: 50%;
     transform: translate(-50%,-50%);
 }
+.g_Block{
+    display: block;
+}
+.g_overFlow{
+    overflow:hidden;
+}
 a{
     color: #fff;
 }
@@ -60,24 +66,6 @@ a:focus, a:hover{
 
 /* 内容部分 */
 
-.g_item_title h1 {
-    text-align: center;
-}
-
-/* 图片信息 */
-.g_infor {
-    position: absolute;
-    top: 4px;
-    left: 20px;
-    right: 20px;
-    height: 40px;
-    background: linear-gradient(to top, transparent, rgba(0,0,0,.3) 100%);
-    opacity: 0;
-    transition: opacity linear .3s;
-}
-.thumbnail:hover .g_infor{
-    opacity: 1;
-}
 /* 图片顶部hover下移动画 */
 .g_infor .g_infor_head,.g_infor_right{
     position: absolute;

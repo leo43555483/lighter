@@ -16,13 +16,15 @@ function PhotoUpload(v,control){
                 this.views = $.extend({},viewParams,v); //关于DOM的相关残书
                 this.fileArray = [];//存放待上传的照片
                 this.dragDrop = this.views.dragDrop;
+                this.inform = this.control.inform;
+                console.log('asf',control)
                 this.init();
             }
 
             PhotoUpload.prototype = {
                 init:function(){
                     let self = this;
-                    this.inform = this.control.inform;
+                    
                     if(this.views.inputFile){
                         this.views.inputFile.on("change",function(e){
                             self.getFiles(e);
@@ -48,6 +50,8 @@ function PhotoUpload(v,control){
                         for(let i = 0; i < file.length; i++){
                             form.append('file',file[i]);
                         }
+                        console.log('thisi',file)
+
                         form.append('information',JSON.stringify(this.inform));
                         self.Ajax(opt,form);
                         
@@ -69,12 +73,12 @@ function PhotoUpload(v,control){
                         //与服务端链接状态 
                             if(xhr.status === 200){ 
                             //服务器返回状态
-                                self.upArray(opt.file);
-                                console.log(self.fileArray)
+                                let res = JSON.parse(xhr.responseText)
+                            console.log('r',opt.file)
+                                self.successCb(res)
                                 /*self.views.success();*/
                             }else{
-                                throw new Error();
-                                console.log(opt.file)
+                                alert('上传失败')
                             }
                         }
                     }
@@ -104,12 +108,13 @@ function PhotoUpload(v,control){
                 upArray:function(targetFile){
                     let temArr = [];
                     let k = 0;
+                    let tar = arguments.length === 2?arguments[1]:arguments[0].name
+                    console.log('fie',this.fileArray)
                     for(let i = 0; i < this.fileArray.length; i++){
-                            if(this.fileArray[i] !== targetFile ){
+                            if(this.fileArray[i].name !== tar){
                                 this.fileArray[i].index = k;
                                 temArr.push(this.fileArray[i]);
                                 k++
-                                console.log(this.fileArray[i])
                             }else{
                                this.fileArray[i].index = k;
                             }
@@ -129,6 +134,7 @@ function PhotoUpload(v,control){
                     let len = this.fileArray.length;
                     let target = e.target;
                     let tempO = this.control.filter(file);
+                    console.log('te',tempO)
                     if(tempO.match) {
                         this.views.imgEorr(tempO); 
                         return
@@ -147,6 +153,18 @@ function PhotoUpload(v,control){
                     }
                    }
                 },
+                successCb:function(msg){
+                    console.log('msg',msg)
+                    if(msg.codeStatus === 0){
+                        alert('部分上传失败')    
+                    }else{
+                        alert('全部上传成功')
+                    }
+                    msg.sucData.forEach((item)=>{
+                        this.upArray(null,item)
+                    })
+                    
+                }
             }
     
             window.photoUpload = PhotoUpload;

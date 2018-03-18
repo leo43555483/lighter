@@ -31,7 +31,8 @@
          file: null,
      },
      inform: {
-         author: String
+         author: String,
+         intro:'爱咋咋滴，啥也不写'
      }
  }
 

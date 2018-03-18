@@ -34,7 +34,7 @@
 }
 
 
-.g_navbar_theme .navbar-brand {
+.g_navbar_theme .navbar-brand ,.g_navbar_active .navbar-brand{
     color: #337ab7;
 }
 

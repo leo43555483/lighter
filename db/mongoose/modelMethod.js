@@ -2,18 +2,18 @@ let bcrypt = require('bcryptjs');
 module.exports = function(mongoose) {
 
     function Photogragher(info) {
-        const self = this;
-        self.info = {};
+        const _this = this;
+        _this.info = {};
         for (let keys in info) {
-            self.info[keys] = info[keys];
+            _this.info[keys] = info[keys];
         }
     }
 
     Photogragher.prototype.save = function(mid, callback) {
-        let self = this;
+        let _this = this;
         let information = {};
         if (mid && mid.toString() === 'pass') {
-            self.handlePass(function(err) {
+            _this.handlePass(function(err) {
                 if (err) return callback(err);
                 saveToDb();
                 return
@@ -23,8 +23,8 @@ module.exports = function(mongoose) {
         }
         
         function saveToDb(){
-            for (let keys in self.info) {
-                information[keys] = self.info[keys];
+            for (let keys in _this.info) {
+                information[keys] = _this.info[keys];
             }
             mongoose.create(information, function(err) {
                 if (err) {
@@ -39,7 +39,7 @@ module.exports = function(mongoose) {
         let user = this;
         bcrypt.genSalt(10, function(err, salt) {
             if(err) {
-                console.log(err)
+                console.error(err)
                 return
             }
             bcrypt.hash(user.info.passWord,salt, function(err, hash) {
@@ -51,10 +51,9 @@ module.exports = function(mongoose) {
     }
 
     Photogragher.authorUser=function(name,pass,fn){  
-        let self = this;
-        console.log(Photogragher.getUserName)
+        let _this = this;
         Photogragher.getUserName(name,function(err,user){
-            user = user.info
+            user = user.info;
             if(err) return fn(err);
             if(!user.userName) return fn(null,null,1); //账户不存在
             bcrypt.compare(pass,user.passWord,function(err,isMatch){
@@ -64,7 +63,6 @@ module.exports = function(mongoose) {
                     sessionUser.userName = user.userName;
                     sessionUser.admin = user.admin;
                     sessionUser._id = user._id;
-                    console.log('sessionUser',sessionUser)
                     return fn(null,sessionUser);
                 } 
                 return fn(null,null,2); //密码错误
@@ -75,23 +73,28 @@ module.exports = function(mongoose) {
      }
     Photogragher.getUserName = function(name,fn){
        Photogragher.findOneProperty({userName:name},null,function(err,user){
-            if(err){
+            if(err){  
                 return fn(err)
             }
-            fn(null,new Photogragher(user))
+            if(user) return fn(null,new Photogragher(user));
+            if(!user) fn(err,user);
+            
         })
     }
     Photogragher.getAllByProperty = function (property, field, callback) {
         mongoose.find(property, field, function(err, data) {
             if (err) return callback(err);
-            callback(null, data);
+            if(data) callback(null, data);
         })
     }
 
     Photogragher.findOneProperty = function(property, field, callback) {
         mongoose.findOne(property, field, function(err, data) {
-            if (err) return callback(err);
-            callback(null, data);
+            if (err) {
+                return callback(err);
+            }
+            if(data) callback(null, data);
+            if(!data) callback(null, null);
         })
     }
 

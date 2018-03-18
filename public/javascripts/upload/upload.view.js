@@ -36,7 +36,7 @@ let v = {
             ul.appendChild(frag);
         }
         let deletImg = function() {
-            $(".g_photoDele").on("click", function(e) { //因为用虚拟DOM所以事件绑定应该在DOM渲染后 
+            $(".g_photoDele").on("click", function(e) { //事件绑定应该在DOM渲染后 
                 let target = $(e.target);
                 target.parent().fadeOut();
                 let j = parseInt(target.attr("data-index")); //转换数字
@@ -44,7 +44,6 @@ let v = {
                 let doms = $("[data-index]");
                 target.removeAttr("data-index");
                 for (let i = j + 1; i < doms.length; i++) {
-                    console.log(j)
                     doms[i].dataset.index = j;
                     j++
                 }

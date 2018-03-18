@@ -1,4 +1,5 @@
 var express = require('express');
+var helmet = require('helmet');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -21,6 +22,7 @@ app.engine('.html', handlebars.engine);
 app.set('view engine', '.html');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser());
 app.use(bodyParser.json());
@@ -37,8 +39,14 @@ app.use(session({
 }))
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static('public'));
-
-
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization,x-access-token");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 app.use('/', index);
 app.use('/upload',upload);
 app.use('/api',api);

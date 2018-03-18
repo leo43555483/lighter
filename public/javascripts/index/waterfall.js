@@ -7,14 +7,16 @@
         this.pendgData = false;
         this._self = obj;
         this.pageCount = 0; //当前在第几页
-        this.itemHeight  = null
+        this.itemHeight  = null;
         this.setting = {
             insertType: 1,
             fade: true,
             fadeSpeed: 400,
             autoImgHeight: false,
+            thumbWrap:'.js-itemBox'
         }
         this.config = $.extend({}, this.setting, opt || {});
+        this.thumbWrap = $(this.config.thumbWrap);
         this.caChe = {}; //缓存返回数据
         this.init();
     }
@@ -35,7 +37,6 @@
         thumbsHeight:function(){        
             let size = $(".thumBox").outerWidth() || $("#g_calcThumb").outerWidth();
             this.itemHeight = size;   //控制thumbnails 高度的值
-            console.log("size",size)
             return size
         },
 
@@ -66,23 +67,33 @@
         },
 
         render: function(ele,h) {
-            let items = `<div class="col-md-3 col-sm-6" >
-                        <div class="thumbnail thumBox" style="height: ${h}px;">
-                            <a class="g_items" href="${ele.person}">
-                                <img class="img-responsive" src=${ele.url} style="height: 100%;">
-                            </a>
-                        <div class="g_infor">
-                        <div class="g_infor_head">
-                            <a class="g_credit" href="${ele.person}"></a>
-                                <div class="g_author">
-                                    <a href="javascript:void(0)">${ele.author}</a>
+            let items = `<div class="col-md-3 col-sm-6 g_titem" >
+                            <div class="thumbnail thumBox " style="height: ${h}px;">
+                                <a class="g_items" href="${ele.person}?i=${ele.url}">
+                                    <img class="img-responsive js-thumbItem g_thumbItem" src=${ele.url} style="height: 100%;">
+                                </a>
+                            <div class="g_infor">
+                                <div class="g_infor_head">
+                                    <a class="g_credit" href="${ele.person}"></a>
+                                    <div class="g_author">
+                                        <a href="javascript:void(0)">${ele.author}</a>
+                                    </div>
                                 </div>
+                                <div class="g_infor_right"></div>
+                                <div class="g_infor_originPic js-opic">
+                                    <i class="iconfont originPic">&#xe61c;</i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="g_infor_right"></div>
+                        <div class="g_preview g_Hide js-preview g_preL">
+                            <img class="js-imgEle g_preVimg" data-src=${ele.gellery}>
+                            <div class="g_preload g_prePreload js-pl">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
                         </div>
-                    </div>
-                </div>`;
-
+                    </div>`;
             return items
         },
 
@@ -91,7 +102,6 @@
             $(window).on("load",function(){
                 this.limit();
                 this.loadItems();
-                console.log("reqL",dataLimit)
             }.bind(_self));
             $(window).on("scroll", function() {
                 this.loadItems();
@@ -107,7 +117,6 @@
         },
         /*更新高度*/
         updataH:function(){
-            /*this.itemHeight = this.thumbsHeight();*/
             $(".thumBox").height(this.itemHeight);
             console.log("new",$(".thumBox").height())
         },
@@ -115,7 +124,7 @@
             let img = new Image,
                 count = 0,
                 that = this;
-            wrap = this._self;
+            wrap = this.thumbWrap;
             let items = ``;
             this.pendgData = true; //阻止请求时再次触发请求
             $(".g_preload").show();
@@ -123,7 +132,6 @@
             let len = resData.datas.length;
 
             let itemHeight = this.itemHeight; //将thumbs的宽高设为1:1
-            console.log("item",itemHeight)
             $(resData.datas).each(function(i, ele) {
                 items += that.render(ele,itemHeight);                //添加DOM
                 $(img).on("load error", function() {
